@@ -24,10 +24,10 @@ public class UserController {
     RestTemplate restTemplate;
 
     private static final String POWER_URL = "http://SERVER-POWER";
-    private static final String ORDER_URL = "http://SERVER-ORDER";
+    private static final String ORDER_URL = "http://CLIENT-ORDER";
 
-    //@Autowired
-    //private PowerFeignClient powerFeignClient;
+    @Autowired
+    private PowerFeignClient powerFeignClient;
 
 
     @RequestMapping("/getUser.do")
@@ -45,8 +45,7 @@ public class UserController {
 
     @RequestMapping("/getFeignPower.do")
     public R getFeignPower() {
-        //return R.success("操作成功", powerFeignClient.getPower());
-        return null;
+        return R.success("操作成功", powerFeignClient.getPower());
     }
 
     @RequestMapping("/getPower.do")

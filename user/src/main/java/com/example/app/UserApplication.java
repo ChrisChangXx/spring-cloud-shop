@@ -1,8 +1,13 @@
 package com.example.app;
 
+import config.OrderRuleConfig;
+import config.PowerRuleConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClients;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 用户应用程序
@@ -15,6 +20,11 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
+@RibbonClients({
+        @RibbonClient(name = "CLIENT_ORDER",configuration = OrderRuleConfig.class),
+        @RibbonClient(name = "SERVER_POWER",configuration = PowerRuleConfig.class)
+})
+@EnableFeignClients
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class);
