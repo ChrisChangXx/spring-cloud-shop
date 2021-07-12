@@ -22,6 +22,8 @@
         <module>eureka3002</module>
         <module>power1</module>
         <module>order1</module>
+        <module>zuul</module>
+        <module>zuul</module>
     </modules>
 
     <properties>

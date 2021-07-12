@@ -3,6 +3,8 @@ package com.example.app.controller;
 
 import com.example.app.service.PowerFeignClient;
 import com.example.app.util.R;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,13 +46,30 @@ public class UserController {
 
 
     @RequestMapping("/getFeignPower.do")
-    public R getFeignPower() {
+    /*@HystrixCommand(fallbackMethod = "fallbackMethod", threadPoolKey = "power", threadPoolProperties = {
+            @HystrixProperty(name = "coreSize", value = "5"),
+    })*/
+    public R getFeignPower(String name) {
         return R.success("操作成功", powerFeignClient.getPower());
     }
 
     @RequestMapping("/getPower.do")
-    public R getPower() {
+    /*@HystrixCommand(fallbackMethod = "fallbackMethod", commandProperties = {
+            //@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "5")
+    })*/
+    /*@HystrixCommand(fallbackMethod = "fallbackMethod", threadPoolKey = "power", threadPoolProperties = {
+            @HystrixProperty(name = "coreSize", value = "5"),
+    })*/
+    public R getPower(String name) throws Exception {
+        System.out.println("调用了方法");
         return R.success("操作成功", restTemplate.getForObject(POWER_URL + "/getPower.do", Object.class));
+    }
+
+    public R fallbackMethod(String name) {
+        System.out.println(name);
+        return R.error("降级信息");
     }
 
 }
