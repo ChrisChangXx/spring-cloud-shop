@@ -23,7 +23,8 @@
         <module>power1</module>
         <module>order1</module>
         <module>zuul</module>
-        <module>zuul</module>
+        <module>zuul9001</module>
+        <module>zuul9002</module>
     </modules>
 
     <properties>
