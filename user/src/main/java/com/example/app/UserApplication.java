@@ -1,7 +1,5 @@
 package com.example.app;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import config.OrderRuleConfig;
 import config.PowerRuleConfig;
 import org.springframework.boot.SpringApplication;
